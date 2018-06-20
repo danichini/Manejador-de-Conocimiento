@@ -36,25 +36,6 @@ namespace WindowsFormsApp6
             conocimientoTableAdapter1.Fill(dataSet1.conocimiento);
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -68,28 +49,57 @@ namespace WindowsFormsApp6
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.conocimientoTableAdapter1.Fill(dataSet1.conocimiento);
+            id_conocTextBox.Text = "";
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             int ID = int.Parse(id_conocTextBox.Text);
-            conocimientoTableAdapter1.UpdateQuery(de_conocTextBox.Text, re_conocTextBox.Text, fe_conocDateTimePicker.Value, ID);
-            conocimientoTableAdapter1.Fill(dataSet1.conocimiento);
+            if (ID > 1)
+            {
+                conocimientoTableAdapter1.UpdateQuery(de_conocTextBox.Text, re_conocTextBox.Text, fe_conocDateTimePicker.Value, ID);
+                conocimientoTableAdapter1.Fill(dataSet1.conocimiento);
+            }
+            else
+            {
+                MessageBox.Show("Operacion Invalida");
+            }
         }
-
-        private void id_conocTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void de_conocTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void button3_Click(object sender, EventArgs e)
         {
             conocimientoTableAdapter1.DeleteQuery(int.Parse(id_conocTextBox.Text));
+            conocimientoTableAdapter1.Fill(dataSet1.conocimiento);
+            button6.PerformClick();
+            
+            
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            id_conocTextBox.Text = "";
+            de_conocTextBox.Text = "";
+            re_conocTextBox.Text = "";
+
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            int ID = int.Parse(id_conocTextBox.Text);
+            conocimientoTableAdapter1.GetDataBy2(ID);
+            conocimientoTableAdapter1.FillBy(dataSet1.conocimiento, ID);
+            
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
             conocimientoTableAdapter1.Fill(dataSet1.conocimiento);
         }
     }
